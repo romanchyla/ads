@@ -335,9 +335,9 @@ class SearchQuery(BaseQuery):
             self._query.setdefault("fl", ["id"])
             if isinstance(self._query["fl"], six.string_types):
                 _ = map(str.strip, self._query["fl"].split(","))
-                self._query["fl"] = ["id"] + list(_)
+                self._query["fl"] = ','.join(sorted(["id"] + list(_)))
             else:
-                self._query["fl"] = ["id"] + self._query["fl"]
+                self._query["fl"] = ','.join(sorted(["id"] + self._query["fl"]))
 
             # Format and add kwarg (key, value) pairs to q
             if kwargs:
